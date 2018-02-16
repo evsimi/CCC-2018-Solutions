@@ -6,6 +6,8 @@
 
 using namespace std;
 
+// Cache of known results of count() to avoid recalculating entire
+// recursion trees
 map<uint64_t, uint64_t> countMap{{0, 0}, {1, 1}};
 
 uint64_t count(uint64_t n) {

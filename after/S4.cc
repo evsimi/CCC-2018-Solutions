@@ -5,6 +5,9 @@
 
 using namespace std;
 
+// The idea here is that read/write of a value in a raw array is O(1),
+// whereas in a std::map it is O(n). This makes the algorithm O(n)
+// instead of O(n^2)
 int64_t *countMap;
 uint64_t n;
 

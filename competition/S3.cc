@@ -4,15 +4,18 @@
 
 using namespace std;
 
+// Represents a possible step for the robot
 struct node {
     int i, j, len;
 };
 
+// Represents a position in the map
 struct element {
     char c;
     int len;
 };
 
+// Preprocessor macros to avoid repetition without having to work with std::function<>
 #define CHECK(i, j) \
 { \
     if (map[i][j].c == 'C') \
@@ -45,6 +48,7 @@ struct element {
 }
 
 int main() {
+    // Read in the map
     int n, m;
     cin >> n >> m;
     element map[n][m];
@@ -59,6 +63,8 @@ int main() {
         }
         while (cin.get() != '\n');
     }
+
+    // Generate next steps until there are no more
     vector<node> cur{start};
     vector<node> next;
     do {
@@ -76,6 +82,8 @@ int main() {
         swap(cur, next);
         next.clear();
     } while (!cur.empty());
+
+    // Print out the lengths to all empty cells
     for (int i = 0; i < n; ++i)
         for (int j = 0; j < m; ++j)
             if (map[i][j].c == '.')

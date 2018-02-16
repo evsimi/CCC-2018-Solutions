@@ -6,6 +6,9 @@
 
 using namespace std;
 
+// This was written during the competition, but never completed
+
+// Represents a specification for flights
 struct flight {
     int a, b, c;
 
@@ -14,6 +17,7 @@ struct flight {
     }
 };
 
+// Represents a specification for portals
 struct portal {
     int x, y, z;
 
@@ -22,6 +26,7 @@ struct portal {
     }
 };
 
+// Represents a possible step in a route
 struct node {
     int city;
     flight *_flight;
@@ -29,6 +34,7 @@ struct node {
 };
 
 int main() {
+    // Read the specs
     int n, m, p, q;
     cin >> n >> m >> p >> q;
     list<flight> flights;
@@ -43,6 +49,7 @@ int main() {
         cin >> _portal.x >> _portal.y >> _portal.z;
         portals.push_back(_portal);
     }
+    // Recursive algorithm (incomplete) to remove the costliest unnecessary flight/portal
     function<void(node *,vector<flight>&)> optimize([&](node *n, vector<flight>& checked) {
         vector<flight *> _flights;
         transform(flights.begin(), flights.end(), back_inserter(_flights), [](flight& _flight){return &_flight;});
@@ -51,6 +58,7 @@ int main() {
         transform(_flights.cbegin(), _flights.cend(), back_inserter(_nodes), [n](flight *_flight){return node{_flight->from(n->city), _flight, n};});
 
     });
+    // Start optimizing
     for (int i = 0; i < m; ++i) {
         node _node{i, nullptr, nullptr};
         vector<flight> checked;
